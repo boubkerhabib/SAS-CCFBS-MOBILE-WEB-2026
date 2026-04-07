@@ -1,0 +1,43 @@
+body {
+    font-family: Arial;
+    background: #dbd4d4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.profile {
+    background: white;
+    padding: 40px;
+    width: 260px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.photo img {
+    width: 100px;
+    border-radius: 50%;
+}
+
+.name {
+    margin-top: 10px;
+}
+
+.job {
+    color: gray;
+}
+
+.description {
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+button {
+    background: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}

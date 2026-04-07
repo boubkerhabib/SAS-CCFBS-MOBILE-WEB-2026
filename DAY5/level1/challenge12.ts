@@ -1,0 +1,11 @@
+let numbers: number[] = [10, 20, 30, 40, 50];
+numbers.push(60);
+console.log("After push:", numbers);
+numbers.unshift(5);
+console.log("After unshift:", numbers);
+numbers.pop();
+console.log("After pop:", numbers);
+numbers.shift();
+console.log("After shift:", numbers);
+console.log("Contains 30:", numbers.includes(30));
+console.log("Length:", numbers.length);
