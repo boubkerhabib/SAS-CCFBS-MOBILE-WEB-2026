@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechConf 2025 - Conférence Technologique Annuelle</title>
+    <style>
+        /* ========== Reset et Styles de Base ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ========== Variables CSS ========== */
+        :root {
+            /* Palette de couleurs - Thème tech moderne */
+            --couleur-primaire: #4361ee;
+            --couleur-secondaire: #3a0ca3;
+            --couleur-accent: #f72585;
+            --couleur-fond: #ffffff;
+            --couleur-fond-sombre: #f8f9fa;
+            --couleur-texte: #2b2d42;
+            --couleur-texte-clair: #6c757d;
+            --couleur-bordure: #e9ecef;
+            --couleur-succes: #4cc9f0;
+            
+            /* Ombres */
+            --ombre-legere: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --ombre-moyenne: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --ombre-forte: 0 20px 25px rgba(0, 0, 0, 0.15);
+            
+            /* Espacements */
+            --espacement-xs: 0.5rem;
+            --espacement-sm: 1rem;
+            --espacement-md: 2rem;
+            --espacement-lg: 4rem;
+            --espacement-xl: 6rem;
+            
+            /* Bordures */
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 20px;
+            
+            /* Transitions */
+            --transition-rapide: all 0.3s ease;
+        }
+
+        /* ========== Styles de Base ========== */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--couleur-texte);
+            background-color: var(--couleur-fond);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--espacement-sm);
+        }
+
+        /* ========== Typographie ========== */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--espacement-md);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: var(--espacement-xs);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--espacement-lg);
+            position: relative;
+            padding-bottom: var(--espacement-sm);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--couleur-primaire), var(--couleur-accent));
+            border-radius: 2px;
+        }
+
+        /* ========== Header et Navigation ========== */
+        header {
+            background: linear-gradient(135deg, var(--couleur-primaire), var(--couleur-secondaire));
+            color: white;
+            padding: var(--espacement-lg) 0 var(--espacement-md);
+        }
+
+        .header-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--espacement-sm);
+        }
+
+        .conference-title {
+            margin-bottom: var(--espacement-xs);
+        }
+
+        .conference-title .year {
+            color: var(--couleur-accent);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: var(--espacement-xs);
+            opacity: 0.95;
+        }
+
+        .date-location {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation fixe */
+        .main-navigation {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            gap: var(--espacement-md);
+            padding: var(--espacement-sm) var(--espacement-md);
+            margin-top: var(--espacement-md);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-sm);
+            transition: var(--transition-rapide);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--couleur-accent);
+            transition: var(--transition-rapide);
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link:hover::after {
+            width: 70%;
+        }
+
+        /* ========== Section Hero ========== */
+        .hero-section {
+            background: linear-gradient(135deg, var(--couleur-secondaire), var(--couleur-primaire));
+            color: white;
+            padding: var(--espacement-xl) 0;
+            text-align: center;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto var(--espacement-lg);
+            padding: 0 var(--espacement-sm);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: var(--espacement-sm);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: var(--espacement-md);
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        /* Boutons */
+        .cta-button {
+            padding: var(--espacement-sm) var(--espacement-md);
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition-rapide);
+            margin: 0 var(--espacement-xs);
+        }
+
+        .cta-button.primary {
+            background-color: var(--couleur-accent);
+            color: white;
+            box-shadow: var(--ombre-moyenne);
+        }
+
+        .cta-button.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--ombre-forte);
+            background-color: #e01e75;
+        }
+
+        .cta-button.secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-button.secondary:hover {
+            background-color: white;
+            color: var(--couleur-primaire);
+            transform: translateY(-3px);
+        }
+
+        /* Compteur */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: var(--espacement-md);
+            margin-top: var(--espacement-lg);
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .countdown-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: var(--espacement-sm) var(--espacement-md);
+            border-radius: var(--border-radius-md);
+            min-width: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .countdown-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ========== Section À Propos ========== */
+        .about-section {
+            padding: var(--espacement-xl) 0;
+            background-color: var(--couleur-fond);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--espacement-md);
+        }
+
+        .feature-card {
+            background-color: var(--couleur-fond);
+            padding: var(--espacement-md);
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            box-shadow: var(--ombre-legere);
+            transition: var(--transition-rapide);
+            border: 1px solid var(--couleur-bordure);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--ombre-moyenne);
+        }
+
+        .feature-card.special {
+            background: linear-gradient(135deg, var(--couleur-primaire), var(--couleur-secondaire));
+            color: white;
+            transform: scale(1.05);
+            border: none;
+        }
+
+        .feature-card.special:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: var(--espacement-sm);
+        }
+
+        /* ========== Section Conférenciers ========== */
+        .speakers-section {
+            padding: var(--espacement-xl) 0;
+            background-color: var(--couleur-fond-sombre);
+        }
+
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--espacement-md);
+        }
+
+        .speaker-card {
+            background-color: var(--couleur-fond);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--ombre-legere);
+            transition: var(--transition-rapide);
+            position: relative;
+            text-align: center;
+            padding-bottom: var(--espacement-md);
+        }
+
+        .speaker-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--ombre-moyenne);
+        }
+
+        .speaker-card.keynote {
+            border: 2px solid var(--couleur-accent);
+        }
+
+        .badge {
+            position: absolute;
+            top: var(--espacement-sm);
+            right: var(--espacement-sm);
+            background-color: var(--couleur-accent);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        .speaker-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, var(--couleur-primaire), var(--couleur-secondaire));
+            margin-bottom: var(--espacement-sm);
+        }
+
+        .speaker-name {
+            color: var(--couleur-texte);
+            margin-bottom: 0.25rem;
+        }
+
+        .speaker-role {
+            color: var(--couleur-texte-clair);
+            font-size: 0.9rem;
+        }
+
+        .speaker-company {
+            color: var(--couleur-primaire);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* ========== Section Billets ========== */
+        .tickets-section {
+            padding: var(--espacement-xl) 0;
+            background: linear-gradient(135deg, var(--couleur-fond-sombre), white);
+        }
+
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--espacement-md);
+            align-items: center;
+        }
+
+        .pricing-card {
+            background-color: var(--couleur-fond);
+            border-radius: var(--border-radius-lg);
+            padding: var(--espacement-md);
+            text-align: center;
+            box-shadow: var(--ombre-legere);
+            transition: var(--transition-rapide);
+            position: relative;
+            border: 1px solid var(--couleur-bordure);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--ombre-forte);
+        }
+
+        .pricing-card.featured {
+            transform: scale(1.05);
+            border: 2px solid var(--couleur-accent);
+            box-shadow: var(--ombre-moyenne);
+            background: white;
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--couleur-accent);
+            color: white;
+            padding: 0.25rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .plan-name {
+            color: var(--couleur-primaire);
+            margin-bottom: var(--espacement-xs);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--couleur-texte);
+            margin-bottom: var(--espacement-sm);
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: var(--espacement-md);
+        }
+
+        .plan-features li {
+            padding: var(--espacement-xs) 0;
+            color: var(--couleur-texte-clair);
+            border-bottom: 1px solid var(--couleur-bordure);
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .select-plan {
+            background-color: var(--couleur-primaire);
+            color: white;
+            border: none;
+            padding: var(--espacement-xs) var(--espacement-md);
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-rapide);
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .select-plan:hover {
+            background-color: var(--couleur-secondaire);
+            transform: translateY(-2px);
+            box-shadow: var(--ombre-moyenne);
+        }
+
+        /* ========== Footer ========== */
+        .main-footer {
+            background: linear-gradient(135deg, var(--couleur-secondaire), var(--couleur-primaire));
+            color: white;
+            padding: var(--espacement-md) 0;
+            text-align: center;
+        }
+
+        .footer-text {
+            margin-bottom: var(--espacement-sm);
+            opacity: 0.9;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--espacement-md);
+        }
+
+        .social-link {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition-rapide);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-sm);
+        }
+
+        .social-link:hover {
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* ========== Animations ========== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== Media Queries ========== */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .main-navigation {
+                flex-wrap: wrap;
+                gap: var(--espacement-xs);
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+            }
+            
+            .countdown-item {
+                min-width: 80px;
+            }
+            
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+            
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+            
+            .feature-card.special {
+                transform: scale(1);
+            }
+            
+            .feature-card.special:hover {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cta-button {
+                display: block;
+                width: 100%;
+                margin: var(--espacement-xs) 0;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="top">
+        <div class="header-content">
+            <h1 class="conference-title">TechConf <span class="year">2025</span></h1>
+            <p class="tagline">Façonner l'Avenir de la Technologie</p>
+            <p class="date-location">15-17 Mars 2025 | Agadir, Maroc</p>
+        </div>
+        <nav class="main-navigation">
+            <a href="#about" class="nav-link">À Propos</a>
+            <a href="#speakers" class="nav-link">Conférenciers</a>
+            <a href="#schedule" class="nav-link">Programme</a>
+            <a href="#tickets" class="nav-link">Billets</a>
+        </nav>
+    </header>
+
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <h2 class="hero-title">Rejoignez 5000+ Leaders Tech</h2>
+            <p class="hero-description">Trois jours de conférences inspirantes, d'ateliers et de networking avec les plus brillants esprits de la technologie.</p>
+            <button class="cta-button primary">S'inscrire Maintenant</button>
+            <button class="cta-button secondary">Voir le Programme</button>
+        </div>
+        <div class="countdown">
+            <div class="countdown-item">
+                <span class="countdown-number">45</span>
+                <span class="countdown-label">Jours</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number">12</span>
+                <span class="countdown-label">Heures</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number">37</span>
+                <span class="countdown-label">Minutes</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section about-section">
+        <div class="container">
+            <h2 class="section-title">Pourquoi Participer à TechConf ?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Innovation</h3>
+                    <p>Découvrez les technologies de pointe et les tendances émergentes</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Networking</h3>
+                    <p>Connectez-vous avec des leaders de l'industrie</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>Apprentissage</h3>
+                    <p>Participez à des ateliers pratiques avec des experts</p>
+                </div>
+                <div class="feature-card special">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Évolution de Carrière</h3>
+                    <p>Faites progresser votre carrière avec de nouvelles compétences</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="speakers" class="section speakers-section">
+        <div class="container">
+            <h2 class="section-title">Conférenciers Vedettes</h2>
+            <div class="speakers-grid">
+                <article class="speaker-card">
+                    <div class="speaker-image"></div>
+                    <h3 class="speaker-name">Dr. Sarah Martin</h3>
+                    <p class="speaker-role">Directrice IA</p>
+                    <p class="speaker-company">TechCorp</p>
+                </article>
+                <article class="speaker-card keynote">
+                    <div class="speaker-image"></div>
+                    <span class="badge">Keynote</span>
+                    <h3 class="speaker-name">Michel Dubois</h3>
+                    <p class="speaker-role">PDG & Fondateur</p>
+                    <p class="speaker-company">StartupX</p>
+                </article>
+                <article class="speaker-card">
+                    <div class="speaker-image"></div>
+                    <h3 class="speaker-name">Emma Laurent</h3>
+                    <p class="speaker-role">Architecte Cloud</p>
+                    <p class="speaker-company">CloudTech</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="tickets" class="section tickets-section">
+        <div class="container">
+            <h2 class="section-title">Obtenez Vos Billets</h2>
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <h3 class="plan-name">Prévente</h3>
+                    <div class="price">299€</div>
+                    <ul class="plan-features">
+                        <li>Toutes les conférences</li>
+                        <li>Événements networking</li>
+                        <li>Matériel de conférence</li>
+                    </ul>
+                    <button class="select-plan">Choisir</button>
+                </div>
+                <div class="pricing-card featured">
+                    <span class="popular-badge">Plus Populaire</span>
+                    <h3 class="plan-name">Professionnel</h3>
+                    <div class="price">499€</div>
+                    <ul class="plan-features">
+                        <li>Tout de la Prévente</li>
+                        <li>Accès aux ateliers</li>
+                        <li>Session de mentorat</li>
+                        <li>Accès aux enregistrements</li>
+                    </ul>
+                    <button class="select-plan">Choisir</button>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="plan-name">VIP</h3>
+                    <div class="price">899€</div>
+                    <ul class="plan-features">
+                        <li>Tout du Professionnel</li>
+                        <li>Dîner VIP</li>
+                        <li>Places premier rang</li>
+                        <li>Rencontres exclusives</li>
+                    </ul>
+                    <button class="select-plan">Choisir</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <p class="footer-text">© 2025 TechConf. Tous droits réservés.</p>
+        <div class="social-links">
+            <a href="#" class="social-link">Twitter</a>
+            <a href="#" class="social-link">LinkedIn</a>
+            <a href="#" class="social-link">Facebook</a>
+        </div>
+    </footer>
+</body>
+</html>

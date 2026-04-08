@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice de Notes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #resultat {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+        .success { background-color: #d4edda; color: #155724; }
+        .warning { background-color: #fff3cd; color: #856404; }
+        .danger { background-color: #f8d7da; color: #721c24; }
+        #listeNotes {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            min-height: 50px;
+        }
+        .note-item {
+            display: inline-block;
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: #e9ecef;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .note-count {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Calculatrice de Notes</h1>
+        
+        <div>
+            <label for="nomEtudiant">👤 Nom de l'étudiant :</label>
+            <input type="text" id="nomEtudiant" placeholder="Entrez le nom">
+        </div>
+        
+        <div>
+            <label for="note">📝 Ajouter une note (sur 20) :</label>
+            <input type="number" id="note" placeholder="Entrez une note" min="0" max="20" step="0.5">
+            <button onclick="ajouterNote()">➕ Ajouter la note</button>
+        </div>
+        
+        <div id="listeNotes">
+            <p style="color: #999; text-align: center;">Aucune note pour le moment</p>
+        </div>
+        
+        <div class="note-count" id="noteCount"></div>
+        
+        <button onclick="calculerMoyenne()">📊 Calculer la Moyenne</button>
+        <button onclick="reinitialiser()" style="background-color: #dc3545; margin-top: 5px;">🔄 Réinitialiser</button>
+        
+        <div id="resultat"></div>
+    </div>
+
+    <script>
+        // Tableau pour stocker les notes
+        let notes = [];
+
+        // Fonction pour mettre à jour le compteur de notes
+        function mettreAJourCompteur() {
+            const compteurDiv = document.getElementById('noteCount');
+            compteurDiv.textContent = `${notes.length} note${notes.length > 1 ? 's' : ''}`;
+        }
+
+        // Fonction pour ajouter une note
+        function ajouterNote() {
+            // Récupérer la valeur du champ note
+            const champNote = document.getElementById('note');
+            const note = parseFloat(champNote.value);
+            
+            // Vérifier si la note est valide
+            if (isNaN(note) || note < 0 || note > 20) {
+                alert('❌ Veuillez entrer une note valide entre 0 et 20');
+                return;
+            }
+            
+            // Si valide : Ajouter au tableau
+            notes.push(note);
+            
+            // Afficher les notes
+            afficherNotes();
+            
+            // Mettre à jour le compteur
+            mettreAJourCompteur();
+            
+            // Vider le champ
+            champNote.value = '';
+            
+            // Focus sur le champ pour ajouter une autre note facilement
+            champNote.focus();
+        }
+
+        // Fonction pour afficher les notes
+        function afficherNotes() {
+            // Récupérer l'élément listeNotes
+            const listeDiv = document.getElementById('listeNotes');
+            
+            // Vider son contenu
+            listeDiv.innerHTML = '';
+            
+            // Vérifier s'il y a des notes
+            if (notes.length === 0) {
+                listeDiv.innerHTML = '<p style="color: #999; text-align: center;">Aucune note pour le moment</p>';
+                return;
+            }
+            
+            // Pour chaque note dans le tableau
+            notes.forEach((note, index) => {
+                // Créer un span avec la classe 'note-item'
+                const span = document.createElement('span');
+                span.className = 'note-item';
+                span.textContent = note;
+                
+                // Ajouter un attribut title pour montrer l'index
+                span.title = `Note ${index + 1}`;
+                
+                // Ajouter la note dans le span
+                listeDiv.appendChild(span);
+            });
+        }
+
+        // Fonction pour calculer la moyenne
+        function calculerMoyenne() {
+            // Récupérer le nom de l'étudiant
+            const nomEtudiant = document.getElementById('nomEtudiant').value.trim();
+            const resultatDiv = document.getElementById('resultat');
+            
+            // Vérifier qu'il y a un nom
+            if (nomEtudiant === '') {
+                alert('❌ Veuillez entrer le nom de l\'étudiant');
+                document.getElementById('nomEtudiant').focus();
+                return;
+            }
+            
+            // Vérifier qu'il y a des notes
+            if (notes.length === 0) {
+                alert('❌ Veuillez ajouter au moins une note');
+                document.getElementById('note').focus();
+                return;
+            }
+            
+            // Calculer la somme des notes
+            const somme = notes.reduce((total, note) => total + note, 0);
+            
+            // Calculer la moyenne
+            const moyenne = somme / notes.length;
+            
+            // Déterminer l'appréciation et la classe CSS
+            let appreciation = "";
+            let classe = "";
+            let emoji = "";
+            
+            if (moyenne >= 16) {
+                appreciation = "Excellent";
+                classe = "success";
+                emoji = "🏆";
+            } else if (moyenne >= 14) {
+                appreciation = "Très bien";
+                classe = "success";
+                emoji = "🌟";
+            } else if (moyenne >= 12) {
+                appreciation = "Bien";
+                classe = "warning";
+                emoji = "👍";
+            } else if (moyenne >= 10) {
+                appreciation = "Passable";
+                classe = "warning";
+                emoji = "😐";
+            } else {
+                appreciation = "Insuffisant";
+                classe = "danger";
+                emoji = "📚";
+            }
+            
+            // Afficher le résultat
+            resultatDiv.innerHTML = `
+                <div style="font-size: 24px; margin-bottom: 10px;">${emoji}</div>
+                <strong style="font-size: 18px;">${nomEtudiant}</strong><br>
+                <span style="font-size: 16px;">Moyenne : ${moyenne.toFixed(2)}/20</span><br>
+                <span style="font-size: 20px; font-weight: bold;">${appreciation}</span>
+            `;
+            resultatDiv.className = classe;
+            resultatDiv.style.display = 'block';
+            
+            // Animation subtile
+            resultatDiv.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                resultatDiv.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        // Fonction pour réinitialiser
+        function reinitialiser() {
+            // Vider le tableau des notes
+            notes = [];
+            
+            // Réinitialiser l'affichage
+            afficherNotes();
+            mettreAJourCompteur();
+            
+            // Cacher le résultat
+            document.getElementById('resultat').style.display = 'none';
+            
+            // Vider les champs
+            document.getElementById('nomEtudiant').value = '';
+            document.getElementById('note').value = '';
+            
+            // Message de confirmation
+            alert('✅ Toutes les données ont été réinitialisées');
+        }
+
+        // Initialisation au chargement de la page
+        window.onload = function() {
+            mettreAJourCompteur();
+            
+            // Ajouter la possibilité d'appuyer sur Entrée pour ajouter une note
+            document.getElementById('note').addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    ajouterNote();
+                }
+            });
+            
+            // Ajouter la possibilité d'appuyer sur Entrée pour le nom
+            document.getElementById('nomEtudiant').addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    document.getElementById('note').focus();
+                }
+            });
+        };
+    </script>
+</body>
+</html>
